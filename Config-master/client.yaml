@@ -1,4 +1,0 @@
-server:
-  port: 8008
-message: hello from client
-test: test main
