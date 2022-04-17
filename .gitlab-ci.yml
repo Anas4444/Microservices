@@ -39,13 +39,4 @@ docker-build-dev:
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
-  - docker tag adminserver registry.gitlab.com/c3156/microservice/anas-el-abed/admin-server:dev
-  - docker tag configserver registry.gitlab.com/c3156/microservice/anas-el-abed/config-server:dev
-  - docker tag eurekaserver registry.gitlab.com/c3156/microservice/anas-el-abed/eureka-server:dev
-  - docker tag clientserver registry.gitlab.com/c3156/microservice/anas-el-abed/client-server:dev
-  - docker tag product registry.gitlab.com/c3156/microservice/anas-el-abed/product-server:dev
-  - docker push registry.gitlab.com/c3156/microservice/anas-el-abed/admin-server:dev
-  - docker push registry.gitlab.com/c3156/microservice/anas-el-abed/config-server:dev
-  - docker push registry.gitlab.com/c3156/microservice/anas-el-abed/eureka-server:dev
-  - docker push registry.gitlab.com/c3156/microservice/anas-el-abed/client-server:dev
-  - docker push registry.gitlab.com/c3156/microservice/anas-el-abed/product-server:dev
+  - docker-compose push --ignore-push-failures
