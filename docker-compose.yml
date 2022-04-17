@@ -5,7 +5,7 @@ services:
         build:
             context: adminserver
             dockerfile: Dockerfile
-        image: admin-server:latest
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/admin-server:latest
         ports:
             - 9919:9919
         networks:
@@ -15,7 +15,7 @@ services:
         build:
             context: centralized-configuration-server
             dockerfile: Dockerfile
-        image: config-server:latest
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/config-server:latest
         ports:
             - 8888:8888
         networks:
@@ -25,7 +25,7 @@ services:
         build:
             context: eureka-server
             dockerfile: Dockerfile
-        image: eureka-server:latest
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/eureka-server:latest
         ports:
             - 9128:9128
         networks:
@@ -45,7 +45,7 @@ services:
         build:
             context: centralized-configuration-client
             dockerfile: Dockerfile
-        image: client-server:latest
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/client-server:latest
         ports:
             - 8111:8111
         networks:
@@ -55,7 +55,7 @@ services:
         build:
             context: products
             dockerfile: Dockerfile
-        image: product-server:latest
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/product-server:latest
         ports:
             - 9101:9101
         networks:
