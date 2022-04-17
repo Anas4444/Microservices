@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9919
+  application:
+    name: products
+  config:
+    import: optional:configserver:http://localhost:8741/	
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9128/eureka/

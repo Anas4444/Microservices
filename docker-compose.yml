@@ -1,0 +1,55 @@
+version: '2'
+services:
+    admin-server:
+        container_name: adminserver
+        build:
+            context: adminserver
+            dockerfile: Dockerfile
+        image: admin-server:latest
+        ports:
+            - 9919:9919
+        networks:
+            - spring-cloud-network
+    config-server:
+        container_name: configserver
+        build:
+            context: centralized-configuration-server
+            dockerfile: Dockerfile
+        image: config-server:latest
+        ports:
+            - 8888:8888
+        networks:
+            - spring-cloud-network
+    eureka-server:
+        container_name: eurekaserver
+        build:
+            context: eureka-server
+            dockerfile: Dockerfile
+        image: eureka-server:latest
+        ports:
+            - 9128:9128
+        networks:
+            - spring-cloud-network
+    client:
+        container_name: clientserver
+        build:
+            context: centralized-configuration-client
+            dockerfile: Dockerfile
+        image: client-server:latest
+        ports:
+            - 8111:8111
+        networks:
+            - spring-cloud-network
+    product:
+        container_name: product
+        build:
+            context: products
+            dockerfile: Dockerfile
+        image: product-server:latest
+        ports:
+            - 9101:9101
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge

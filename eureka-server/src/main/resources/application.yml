@@ -1,0 +1,23 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+server:
+  port: 9128
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9919
+  application:
+    name: eureka-server
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:9128/eureka/

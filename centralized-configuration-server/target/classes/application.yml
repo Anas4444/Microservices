@@ -1,6 +1,18 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
 server:
   port: 8888
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9919
   cloud:
     config:
       server:

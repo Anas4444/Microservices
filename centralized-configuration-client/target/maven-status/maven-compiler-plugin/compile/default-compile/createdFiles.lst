@@ -1,2 +1,7 @@
-ConfigClient\centralizedconfigurationclient\MessageRestController.class
 ConfigClient\centralizedconfigurationclient\CentralizedConfigurationClientApplication.class
+status\Status.class
+ConfigClient\centralizedconfigurationclient\MessageRestController.class
+status\StatusService.class
+ConfigClient\centralizedconfigurationclient\TestController.class
+status\StatusController.class
+status\StatusRepository.class
