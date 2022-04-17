@@ -12,8 +12,15 @@ stages:
 
 docker-build-prod:
   stage: package
+  image: maven:3.8-openjdk-11
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - mvn -f adminserver/pom.xml clean package
+    - mvn -f centralized-configuration-client/pom.xml clean package
+    - mvn -f centralized-configuration-server/pom.xml clean package
+    - mvn -f eureka-server/pom.xml clean package
+    - mvn -f products/pom.xml clean package
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
@@ -32,6 +39,12 @@ docker-build-dev:
   stage: package
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
+  before_script:
+    - mvn -f adminserver/pom.xml clean package
+    - mvn -f centralized-configuration-client/pom.xml clean package
+    - mvn -f centralized-configuration-server/pom.xml clean package
+    - mvn -f eureka-server/pom.xml clean package
+    - mvn -f products/pom.xml clean package
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
