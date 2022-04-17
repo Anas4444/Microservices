@@ -1,26 +1,25 @@
-image: docker/compose
+image: maven:3.8.4-openjdk-17
 services: 
   - name: docker:dind
     entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
-
+before_script:
+  - mvn -f adminserver/pom.xml clean package
+  - mvn -f centralized-configuration-client/pom.xml clean package
+  - mvn -f centralized-configuration-server/pom.xml clean package
+  - mvn -f eureka-server/pom.xml clean package
+  - mvn -f products/pom.xml clean package
 stages:
   - package
 
 
 docker-build-prod:
   stage: package
-  image: maven:3.8.4-openjdk-17
+  image: docker/compose
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  before_script:
-    - mvn -f adminserver/pom.xml clean package
-    - mvn -f centralized-configuration-client/pom.xml clean package
-    - mvn -f centralized-configuration-server/pom.xml clean package
-    - mvn -f eureka-server/pom.xml clean package
-    - mvn -f products/pom.xml clean package
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
@@ -37,15 +36,9 @@ docker-build-prod:
 
 docker-build-dev:
   stage: package
-  image: maven:3.8.4-openjdk-17
+  image: docker/compose
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
-  before_script:
-    - mvn -f adminserver/pom.xml clean package
-    - mvn -f centralized-configuration-client/pom.xml clean package
-    - mvn -f centralized-configuration-server/pom.xml clean package
-    - mvn -f eureka-server/pom.xml clean package
-    - mvn -f products/pom.xml clean package
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
