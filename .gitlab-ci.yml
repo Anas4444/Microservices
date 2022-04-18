@@ -15,11 +15,11 @@ docker-build-prod:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
-  - mvn -f adminserver/pom.xml clean package
-  - mvn -f centralized-configuration-client/pom.xml clean package
-  - mvn -f centralized-configuration-server/pom.xml clean package
-  - mvn -f eureka-server/pom.xml clean package
-  - mvn -f products/pom.xml clean package
+  - mvn clean package -f adminserver/pom.xml 
+  - mvn clean package -f centralized-configuration-client/pom.xml
+  - mvn clean package -f centralized-configuration-server/pom.xml
+  - mvn clean package -f eureka-server/pom.xml
+  - mvn clean package -f products/pom.xml
 
 docker-build-dev:
   stage: build
@@ -27,11 +27,11 @@ docker-build-dev:
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
   script:
-  - mvn -f adminserver/pom.xml clean package
-  - mvn -f centralized-configuration-client/pom.xml clean package
-  - mvn -f centralized-configuration-server/pom.xml clean package
-  - mvn -f eureka-server/pom.xml clean package
-  - mvn -f products/pom.xml clean package
+  - mvn clean package -f adminserver/pom.xml 
+  - mvn clean package -f centralized-configuration-client/pom.xml
+  - mvn clean package -f centralized-configuration-server/pom.xml
+  - mvn clean package -f eureka-server/pom.xml
+  - mvn clean package -f products/pom.xml
   
 docker-package-prod:
   stage: package
