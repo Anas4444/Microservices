@@ -30,6 +30,16 @@ services:
             - 9128:9128
         networks:
             - spring-cloud-network
+    gateway:
+        container_name: gateway
+        build:
+            context: gateway
+            dockerfile: Dockerfile
+        image: gateway:latest
+        ports:
+            - 9954:9954
+        networks:
+            - spring-cloud-network
     client:
         container_name: clientserver
         build:

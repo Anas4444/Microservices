@@ -32,6 +32,7 @@ public class ProductsApplication {
 
 @RefreshScope
 @RestController
+@RequestMapping("/product")
 class MessageRestController {
 
  @Autowired

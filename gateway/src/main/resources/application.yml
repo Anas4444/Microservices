@@ -1,2 +1,23 @@
 server:
   port: 9954
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9128/eureka 
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: 'true'
+      routes:
+        - id: clientModule
+          uri: lb://CLIENT
+          predicates:
+          - Path=/client/**
+        - id: productModule
+          uri: lb://PRODUCT
+          predicates:
+          - Path=/product/**

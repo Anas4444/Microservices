@@ -23,6 +23,7 @@ public class CentralizedConfigurationClientApplication {
 
 @RefreshScope
 @RestController
+@RequestMapping("/client")
 class MessageRestController {
 
   @Value("${message:Hello default}")

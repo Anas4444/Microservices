@@ -12,7 +12,7 @@ spring:
       client:
         url: http://localhost:9919
   application:
-    name: products
+    name: product
   config:
     import: optional:configserver:http://localhost:8741/	
 eureka:
