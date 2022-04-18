@@ -20,6 +20,13 @@ docker-build-prod:
   - mvn clean package -f centralized-configuration-server/pom.xml
   - mvn clean package -f eureka-server/pom.xml
   - mvn clean package -f products/pom.xml
+  artifacts:
+    paths:
+      - adminserver/target/*.jar
+      - centralized-configuration-client/target/*.jar
+      - centralized-configuration-server/target/*.jar
+      - eureka-server/target/*.jar
+      - products/target/*.jar
 
 docker-build-dev:
   stage: build
@@ -32,6 +39,13 @@ docker-build-dev:
   - mvn clean package -f centralized-configuration-server/pom.xml
   - mvn clean package -f eureka-server/pom.xml
   - mvn clean package -f products/pom.xml
+  artifacts:
+    paths:
+      - adminserver/target/*.jar
+      - centralized-configuration-client/target/*.jar
+      - centralized-configuration-server/target/*.jar
+      - eureka-server/target/*.jar
+      - products/target/*.jar
   
 docker-package-prod:
   stage: package
