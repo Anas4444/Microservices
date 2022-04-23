@@ -1,0 +1,30 @@
+version: '2'
+services:
+    postgres:
+        image: postgres:latest
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: keycloak
+            POSTGRES_USER: keycloak
+            POSTGRES_PASSWORD: Kharia100Aa
+        networks:
+            - keycloak-local
+    keycloak:
+        image: jboss/keycloak:latest
+        depends_on:
+            - postgres
+        container_name: local_keycloak
+        environment:
+            DB_VENDOR: postgres
+            DB_ADDR: postgres
+            DB_DATABASE: keycloak
+            DB_USER: keycloak
+            DB_PASSWORD: Kharia100Aa
+        ports:
+            - "8080:8080"
+        restart: unless-stopped
+        networks:
+            - keycloak-local
+networks:
+    keycloak-local:
+        driver: bridge

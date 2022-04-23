@@ -1,0 +1,38 @@
+version: '2'
+services:
+    config-server:
+        container_name: configserver
+        build:
+            context: centralized-configuration-server
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/config-server:latest
+        ports:
+            - 8888:8888
+        networks:
+            - spring-cloud-network
+    client:
+        container_name: clientserver
+        build:
+            context: centralized-configuration-client
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/client-server:latest
+        ports:
+            - 8111:8111
+        depends_on:
+            - "config-server"
+        networks:
+            - spring-cloud-network
+    product:
+        container_name: product
+        build:
+            context: products
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/c3156/microservice/anas-el-abed/product-server:latest
+        ports:
+            - 9101:9101
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge

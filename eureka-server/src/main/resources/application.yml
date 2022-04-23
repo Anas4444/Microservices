@@ -21,3 +21,15 @@ eureka:
     registerWithEureka: false
     serviceUrl:
       defaultZone: http://localhost:9128/eureka/
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: SpringBootKeycloak
+  resource: login-app
+  public-client: true
+  security-constraints:
+    - authRoles: [user]
+      securityCollections:
+        - name: eureka
+          patterns: ['/*']
+    
+  principal-attribute: preferred_username
