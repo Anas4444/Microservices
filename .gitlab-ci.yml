@@ -1,0 +1,72 @@
+services: 
+  - name: docker:dind
+    entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - package
+  - build
+
+docker-package-prod:
+  stage: package
+  image: maven:3.8.4-openjdk-17
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+  - mvn clean package -f adminserver/pom.xml 
+  - mvn clean package -f centralized-configuration-client/pom.xml
+  - mvn clean package -f centralized-configuration-server/pom.xml
+  - mvn clean package -f eureka-server/pom.xml
+  - mvn clean package -f products/pom.xml
+  - mvn clean package -f gateway/pom.xml
+  artifacts:
+    paths:
+      - adminserver/target/*.jar
+      - centralized-configuration-client/target/*.jar
+      - centralized-configuration-server/target/*.jar
+      - eureka-server/target/*.jar
+      - products/target/*.jar
+      - gateway/target/*.jar
+
+docker-package-dev:
+  stage: package
+  image: maven:3.8.4-openjdk-17
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+  script:
+  - mvn clean package -f adminserver/pom.xml 
+  - mvn clean package -f centralized-configuration-client/pom.xml
+  - mvn clean package -f centralized-configuration-server/pom.xml
+  - mvn clean package -f eureka-server/pom.xml
+  - mvn clean package -f products/pom.xml
+  - mvn clean package -f gateway/pom.xml
+  artifacts:
+    paths:
+      - adminserver/target/*.jar
+      - centralized-configuration-client/target/*.jar
+      - centralized-configuration-server/target/*.jar
+      - eureka-server/target/*.jar
+      - products/target/*.jar
+      - gateway/target/*.jar
+  
+docker-build-prod:
+  stage: build
+  image: docker/compose
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker-compose build
+  - docker-compose push --ignore-push-failures
+
+docker-build-dev:
+  stage: build
+  image: docker/compose
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+  script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker-compose build
+  - docker-compose push --ignore-push-failures
