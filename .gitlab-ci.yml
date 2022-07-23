@@ -69,4 +69,8 @@ docker-build-dev:
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
+<<<<<<< HEAD
   - docker-compose push --ignore-push-failures
+=======
+  - docker-compose push --ignore-push-failures
+>>>>>>> ec573b608868c05b6ad991860450000dcbf96304
