@@ -1,0 +1,4 @@
+server:
+  port: 9456
+message: from profile test
+test: test profile

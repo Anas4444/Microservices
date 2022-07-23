@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 # micro-services
+=======
+<<<<<<< HEAD
+# Anas El Abed
+=======
+# config-server
+>>>>>>> 8355a2a (Initial commit)
+>>>>>>> 05760ec (adding my configuration)
 
 
 
@@ -15,14 +23,30 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
+<<<<<<< HEAD
 git remote add origin https://gitlab.com/Anas4444/micro-services.git
+=======
+<<<<<<< HEAD
+git remote add origin https://gitlab.com/c3156/microservice/anas-el-abed.git
+=======
+git remote add origin https://gitlab.com/c3156/microservice/config-server.git
+>>>>>>> 8355a2a (Initial commit)
+>>>>>>> 05760ec (adding my configuration)
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
+<<<<<<< HEAD
 - [ ] [Set up project integrations](https://gitlab.com/Anas4444/micro-services/-/settings/integrations)
+=======
+<<<<<<< HEAD
+- [ ] [Set up project integrations](https://gitlab.com/c3156/microservice/anas-el-abed/-/settings/integrations)
+=======
+- [ ] [Set up project integrations](https://gitlab.com/c3156/microservice/config-server/-/settings/integrations)
+>>>>>>> 8355a2a (Initial commit)
+>>>>>>> 05760ec (adding my configuration)
 
 ## Collaborate with your team
 
