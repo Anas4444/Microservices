@@ -6,11 +6,11 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 stages:
-  - build
   - package
+  - build
 
-docker-build-prod:
-  stage: build
+docker-package-prod:
+  stage: package
   image: maven:3.8.4-openjdk-17
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -30,8 +30,8 @@ docker-build-prod:
       - products/target/*.jar
       - gateway/target/*.jar
 
-docker-build-dev:
-  stage: build
+docker-package-dev:
+  stage: package
   image: maven:3.8.4-openjdk-17
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
@@ -51,8 +51,8 @@ docker-build-dev:
       - products/target/*.jar
       - gateway/target/*.jar
   
-docker-package-prod:
-  stage: package
+docker-build-prod:
+  stage: build
   image: docker/compose
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -61,8 +61,8 @@ docker-package-prod:
   - docker-compose build
   - docker-compose push --ignore-push-failures
 
-docker-package-dev:
-  stage: package
+docker-build-dev:
+  stage: build
   image: docker/compose
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
