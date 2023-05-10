@@ -1,7 +1,6 @@
 <<<<<<< HEAD
 # micro-services
 This project is an implementation of the micro-services architecture using spring boot and spring cloud, where configuration files were externalized to a git repository using spring cloud config-server, each micro-service is registered to a discovery server "eureka server," and for each request, the gateway server obtains client information from eureka server and roots it into a given path. Each micro-service is containerized using Docker and a gitlab-ci script that includes a packaging stage that packages the spring-boot project into a jar file and a build stage that creates an image for each container and pushes it to the gitlab container registry. Each stage comprises a number of tasks that are executed in a pipeline using the gitlab runner.
-
 <<<<<<< HEAD
 # Anas El Abed
 =======
